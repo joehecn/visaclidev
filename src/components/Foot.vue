@@ -1,9 +1,9 @@
 <template>
   <div class="BD_foot">
     <div class="BD_foot-nav">
-      <a href="/About">关于我们</a> |
-      <a href="/About/cooperate">商务合作</a> |
-      <a href="/About/contact">联系地址</a>
+      <router-link :to="{path: '/about'}">关于我们</router-link>
+      <router-link :to="{path: '/cooperate'}">商务合作</router-link>
+      <router-link :to="{path: '/contact'}">联系方式</router-link>
     </div>
     <div class="BD_foot-copyright"><a style="color:#ccc;" href="http://www.miibeian.gov.cn" target="_blank">粤ICP备14056064号-1</a>   Copyright © 2016-2017 joehe.cn All rights reserved</div>
   </div>

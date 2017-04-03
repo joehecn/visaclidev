@@ -7,6 +7,8 @@
 </template>
 
 <script>
+'use strict'
+
 export default {
   name: 'spinner',
   props: ['show'],

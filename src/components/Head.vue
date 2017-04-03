@@ -1,15 +1,25 @@
 <template>
-  <el-row type="flex" class="menu-bg" justify="center" :gutter="0">
-    <el-col :xs="24" :sm="24" :md="18" :lg="18">
+  <el-row type="flex"
+          class="menu-bg"
+          :class="skin ? 'menu-bg-white' : 'menu-bg-dark'"
+          justify="center"
+          :gutter="0">
+    <el-col :xs="24"
+            :sm="24"
+            :md="18"
+            :lg="18">
       <div class="BD_logo">
         <router-link to="/">
-          <img src="/public/logo-48.png" alt="签证网">
+          <img src="/public/logo-48.png"
+               alt="签证网">
           <span>签证网</span>
         </router-link>
         <div class="BD_menu">
-          <router-link to="/" exact>首页</router-link>
+          <router-link to="/"
+                       exact>首页</router-link>
           <!--<router-link to="/list">签证</router-link>-->
-          <a :class="$route.name === 'list' ? 'router-link-active' : ''" @click="toListClick">签证</a>
+          <a :class="$route.name === 'list' ? 'router-link-active' : ''"
+             @click="toListClick">签证</a>
         </div>
       </div>
     </el-col>
@@ -17,29 +27,36 @@
 </template>
 
 <script>
-  'use strict'
+'use strict'
 
-  import {
-    Row,
-    Col
-  } from 'element-ui'
+import {
+  Row,
+  Col
+} from 'element-ui'
 
-  export default {
-    name: 'headwrap',
-    data () {
-      return {}
-    },
-    computed: {},
-    methods: {
-      toListClick () {
-        console.log('toListClick')
-      }
-    },
-    components: {
-      elRow: Row,
-      elCol: Col
+import { getWhere } from '../filters'
+
+export default {
+  name: 'headwrap',
+  props: ['skin'],
+  data () {
+    return {}
+  },
+  computed: {},
+  methods: {
+    toListClick() {
+      // console.log('toListClick')
+      const pre = this.$store.state.pre
+      const where = getWhere(pre)
+      // console.log(where)
+      this.$router.push(`/list/${pre.page}/${pre.order}/${pre.ad}${where}`)
     }
+  },
+  components: {
+    elRow: Row,
+    elCol: Col
   }
+}
 </script>
 
 <style lang="stylus" scoped>
@@ -48,6 +65,29 @@
   position fixed
   z-index 1000
   background rgba(0,0,0,.35)
+.menu-bg-white
+  background #fff
+  border-bottom 1px solid #f5f5f5
+  .BD_logo
+    span
+      color #333
+  .BD_menu
+    a
+      color #333
+    .router-link-active
+      color #fff
+      border 1px solid #ed6c61
+      background #ed6c61
+.menu-bg-dark
+  background rgba(0,0,0,.35)
+  .BD_logo
+    span
+      color #fff
+  .BD_menu
+    a
+      color #fff
+    .router-link-active
+      border 1px solid #fff
 .BD_logo
   height 70px
   width 160px
@@ -60,7 +100,6 @@
     margin -18px 0 0 12px
   span
     font-size 32px
-    color #fff
     position absolute
     top 50%
     margin -18px 0 0 60px
@@ -79,8 +118,5 @@
     line-height 32px
     font-size 16px
     text-align center
-    color #fff
     border-radius: 50px
-  .router-link-active
-    border 1px solid #fff
 </style>

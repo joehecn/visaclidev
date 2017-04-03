@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <vs-head></vs-head>
+    <!--<vs-head></vs-head>-->
     <router-view class="view"></router-view>
     <vs-foot></vs-foot>
   </div>
@@ -9,7 +9,7 @@
 <script>
 'use strict'
 
-import Head from './components/Head.vue'
+// import Head from './components/Head.vue'
 import Foot from './components/Foot.vue'
 
 export default {
@@ -33,7 +33,7 @@ export default {
     }
   },
   components: {
-    vsHead: Head,
+    // vsHead: Head,
     vsFoot: Foot
   }
 }

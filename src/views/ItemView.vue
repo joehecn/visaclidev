@@ -1,8 +1,9 @@
 <template>
   <div class="item-view"
        v-if="item">
+    <vs-head skin="white"></vs-head>
     <div class="head-back"></div>
-    <rowwarp>
+    <vs-rowwarp>
       <div class="el-breadcrumb">
         <span class="el-breadcrumb__item" @click="breadcrumbClick(1)">
           <span class="el-breadcrumb__item__inner">首页</span>
@@ -23,17 +24,17 @@
         <el-breadcrumb-item>{{item.title}}</el-breadcrumb-item>
       </el-breadcrumb>-->
 
-      <detail :item="item"></detail>
-    </rowwarp>
+      <vs-detail :item="item"></vs-detail>
+    </vs-rowwarp>
 
-    <rowwarp class="itemno">
-      <Itemno v-for="item in items"
+    <vs-rowwarp class="itemno">
+      <vs-itemno v-for="item in items"
               :key="item.id"
               :item="item">
-      </Itemno>
-    </rowwarp>
+      </vs-itemno>
+    </vs-rowwarp>
 
-    <rowwarp class="tabdetail">
+    <vs-rowwarp class="tabdetail">
       <el-collapse v-model="activeName"
                    accordion>
         <el-collapse-item title="办理流程"
@@ -83,27 +84,27 @@
                      @tab-click="handleClick">
               <el-tab-pane label="在职"
                            name="first">
-                <item-table></item-table>
+                <vs-item-table></vs-item-table>
               </el-tab-pane>
               <el-tab-pane label="自由职业"
                            name="second">
-                <item-table></item-table>
+                <vs-item-table></vs-item-table>
               </el-tab-pane>
               <el-tab-pane label="在校学生"
                            name="third">
-                <item-table></item-table>
+                <vs-item-table></vs-item-table>
               </el-tab-pane>
               <el-tab-pane label="退休"
                            name="fourth">
-                <item-table></item-table>
+                <vs-item-table></vs-item-table>
               </el-tab-pane>
               <el-tab-pane label="学龄前儿童"
                            name="five">
-                <item-table></item-table>
+                <vs-item-table></vs-item-table>
               </el-tab-pane>
               <el-tab-pane label="家庭主妇"
                            name="six">
-                <item-table></item-table>
+                <vs-item-table></vs-item-table>
               </el-tab-pane>
             </el-tabs>
           </template>
@@ -123,8 +124,8 @@
           <div>2.资料未入馆办理，将收取服务费用 。具体金额以供应商商议结果为准。</div>
         </el-collapse-item>
       </el-collapse>
-    </rowwarp>
-    <spinner :show="loading"></spinner>
+    </vs-rowwarp>
+    <vs-spinner :show="loading"></vs-spinner>
   </div>
 </template>
 
@@ -132,19 +133,22 @@
 'use strict'
 
 import {
-  // Breadcrumb,
-  // BreadcrumbItem,
   Collapse,
   CollapseItem,
   Tabs,
   TabPane
 } from 'element-ui'
 
-import Rowwarp from '../components/Rowwarp.vue'
-import Detail from '../components/Detail.vue'
-import Itemno from '../components/Itemno.vue'
-import ItemTable from '../components/ItemTable.vue'
-import Spinner from '../components/Spinner.vue'
+import {
+  VsHead,
+  VsRowwarp,
+  VsDetail,
+  VsItemno,
+  VsItemTable,
+  VsSpinner
+} from '../components'
+
+import { getWhere } from '../filters'
 
 function fetchItem(store) {
   return store.dispatch('FETCH_ITEMS')
@@ -159,11 +163,12 @@ export default {
     elCollapseItem: CollapseItem,
     elTabs: Tabs,
     elTabPane: TabPane,
-    Rowwarp,
-    Detail,
-    Itemno,
-    ItemTable,
-    Spinner
+    VsHead,
+    VsRowwarp,
+    VsDetail,
+    VsItemno,
+    VsItemTable,
+    VsSpinner
   },
   data() {
     return {
@@ -200,7 +205,14 @@ export default {
       console.log(tab, event)
     },
     breadcrumbClick(index) {
-      console.log('breadcrumbClick: ', index)
+      // console.log('breadcrumbClick: ', index)
+      if (index === 2) {
+        const pre = this.$store.state.pre
+        const where = getWhere(pre)
+        this.$router.push(`/list/${pre.page}/${pre.order}/${pre.ad}${where}`)
+      } else {
+        this.$router.push('/')
+      }
     }
   }
 }
@@ -212,9 +224,9 @@ export default {
   background #f5f5f5
 .head-back
   padding-top 72px
-  background-image url(/public/carousel1.jpg)
-  background-size cover
-  background-position top
+  // background-image url(/public/carousel1.jpg)
+  // background-size cover
+  // background-position top
 .el-breadcrumb
   margin 15px
 .itemno
@@ -222,9 +234,10 @@ export default {
 .tabdetail
   padding-bottom 8px
 .order-step
+  text-align center
   .step
-    float left
-    display block
+    // float left
+    display inline-block
     position relative
     margin-right 80px
     text-align center

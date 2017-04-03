@@ -5,7 +5,7 @@
     </div>-->
     <el-col :xs="6" :sm="6" :md="6" :lg="6">
       <router-link :to="'/item/' + item._id">
-        <img class="product-img" :src="'http://joehe-visa.oss-cn-shenzhen.aliyuncs.com/jpg/' + item.img.trim() + '.jpg'" alt="签证网签证产品">
+        <img class="product-img" :src="`http://joehe-visa.oss-cn-shenzhen.aliyuncs.com/jpg/${item.img.trim()}.jpg`" alt="签证网签证产品">
       </router-link>
     </el-col>
     <el-col :xs="18" :sm="18" :md="18" :lg="18">
@@ -49,7 +49,6 @@
 
 <script>
 'use strict'
-import { formatPrice } from '../filters'
 
 import {
   Row,

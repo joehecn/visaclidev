@@ -44,7 +44,7 @@
         <div class="other">
           <span class="sub">￥</span>
           <span class="price">{{item.price | formatPrice}}</span>
-          <router-link :to="{path: '/'}">立即预订</router-link>
+          <router-link :to="{path: '/neworder'}">立即预订</router-link>
         </div>
       </div>
     </el-col>
@@ -53,7 +53,6 @@
 
 <script>
 'use strict'
-import { formatPrice } from '../filters'
 
 import {
   Row,

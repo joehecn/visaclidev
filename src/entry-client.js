@@ -1,3 +1,5 @@
+'use strict'
+
 import 'es6-promise/auto'
 // css reset
 import 'normalize.css/normalize.css'
