@@ -81,7 +81,7 @@ app.get('*', (req, res) => {
     .pipe(res)
 })
 
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 9000
 app.listen(port, () => {
   console.log(`server started at localhost:${port}`)
 })

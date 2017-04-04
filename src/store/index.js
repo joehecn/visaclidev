@@ -69,6 +69,7 @@ const store = new Vuex.Store({
     },
     SET_LIST: (state, { data }) => {
       if (data.success && data.success === 1) {
+        console.log('count: ', data.count)
         state.count = data.count
         state.list = data.list
       } else {

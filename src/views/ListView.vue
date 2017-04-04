@@ -152,7 +152,8 @@ export default {
       return Number(this.$store.state.route.params.page) || 1
     },
     count() {
-      return this.$store.state.count
+      console.log(this.$store.state.count)
+      return this.$store.state.count || 0
     }
   },
 
